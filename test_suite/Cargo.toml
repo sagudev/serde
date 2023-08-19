@@ -1,12 +1,16 @@
 [package]
 name = "serde_test_suite"
 version = "0.0.0"
-authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>", "David Tolnay <dtolnay@gmail.com>"]
+authors = [
+    "Erick Tryzelaar <erick.tryzelaar@gmail.com>",
+    "David Tolnay <dtolnay@gmail.com>",
+]
 edition = "2018"
 publish = false
 
 [features]
 unstable = ["serde/unstable"]
+compiled = ["serde_derive/compiled"]
 
 [dependencies]
 serde = { path = "../serde" }

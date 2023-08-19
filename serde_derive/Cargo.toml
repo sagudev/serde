@@ -1,7 +1,10 @@
 [package]
 name = "serde_derive"
 version = "1.0.183" # remember to update html_root_url
-authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>", "David Tolnay <dtolnay@gmail.com>"]
+authors = [
+    "Erick Tryzelaar <erick.tryzelaar@gmail.com>",
+    "David Tolnay <dtolnay@gmail.com>",
+]
 categories = ["no-std", "no-std::no-alloc"]
 description = "Macros 1.1 implementation of #[derive(Serialize, Deserialize)]"
 documentation = "https://serde.rs/derive.html"
@@ -15,15 +18,22 @@ rust-version = "1.56"
 [features]
 default = []
 deserialize_in_place = []
+# do not use precompiled
+compiled = ["proc-macro2", "quote", "syn"]
+
+[target.'cfg(not(all(target_arch = "x86_64", target_os = "linux", target_env = "gnu")))'.dependencies]
+proc-macro2 = { version = "1" }
+quote = { version = "1" }
+syn = { version = "2.0.28" }
 
 [lib]
 name = "serde_derive"
 proc-macro = true
 
 [dependencies]
-proc-macro2 = "1.0"
-quote = "1.0"
-syn = "2.0.28"
+proc-macro2 = { version = "1", optional = true }
+quote = { version = "1", optional = true }
+syn = { version = "2.0.28", optional = true }
 
 [dev-dependencies]
 serde = { version = "1", path = "../serde" }

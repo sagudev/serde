@@ -5,6 +5,9 @@ authors = ["David Tolnay <dtolnay@gmail.com>"]
 edition = "2018"
 publish = false
 
+[features]
+compiled = ["serde_derive/compiled"]
+
 [dependencies]
 libc = { version = "0.2", default-features = false }
 serde = { path = "../../serde", default-features = false }

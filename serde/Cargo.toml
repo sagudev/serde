@@ -1,7 +1,10 @@
 [package]
 name = "serde"
 version = "1.0.183" # remember to update html_root_url and serde_derive dependency
-authors = ["Erick Tryzelaar <erick.tryzelaar@gmail.com>", "David Tolnay <dtolnay@gmail.com>"]
+authors = [
+    "Erick Tryzelaar <erick.tryzelaar@gmail.com>",
+    "David Tolnay <dtolnay@gmail.com>",
+]
 build = "build.rs"
 categories = ["encoding", "no-std", "no-std::no-alloc"]
 description = "A generic serialization/deserialization framework"
@@ -39,6 +42,8 @@ default = ["std"]
 
 # Provide derive(Serialize, Deserialize) macros.
 derive = ["serde_derive"]
+
+derive_compiled = ["serde_derive/compiled"]
 
 # Provide impls for common standard library types like Vec<T> and HashMap<K, V>.
 # Requires a dependency on the Rust standard library.
