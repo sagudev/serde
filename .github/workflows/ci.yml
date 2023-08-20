@@ -130,6 +130,26 @@ jobs:
           git diff
       - run: cd test_suite && cargo test --features unstable -- --skip ui --exact
 
+  notprecompiled:
+    name: Not Precompiled
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src
+      - run: precompiled/build.sh
+      - name: replace serde_derive dependency with precompiled
+        run: |
+          cargo rm serde_derive --package serde
+          cargo rm serde_derive --package serde --dev
+          sed -i '/"serde_derive"/d' Cargo.toml
+          sed -i '/\[workspace\]/d' precompiled/serde_derive/Cargo.toml
+          cargo add --dev serde_derive --path precompiled/serde_derive --package serde_test_suite
+          git diff
+      - run: cd test_suite && cargo test --features unstable -- --skip ui --exact
+
   macos:
     name: macOS
     runs-on: macos-latest
